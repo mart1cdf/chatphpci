@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: chat-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - chatdb_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+
+volumes:
+  chatdb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /mnt/gfs/chatdb
+      o: bind
