@@ -21,7 +21,3 @@ volumes:
       type: none
       device: /mnt/gfs/chatdb
       o: bind
-
-networks:
-  monitor:
-    driver: overlay
